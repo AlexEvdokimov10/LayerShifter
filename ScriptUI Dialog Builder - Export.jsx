@@ -80,7 +80,7 @@ tabOne.alignChildren = ["left", "top"];
 tabOne.spacing = 5;
 tabOne.margins = 0;
 
-var checkboxTabOne = tabOne.add("checkbox", undefined, undefined, {name: "checkbox1"});
+var checkboxTabOne = tabOne.add('checkbox {properties: {name:"multiText"}}');
 checkboxTabOne.text = "Multitext";
 checkboxTabOne.value = true;
 
@@ -90,7 +90,7 @@ dividerOneTabOne.alignment = "fill";
 var statictextDurTabOne = tabOne.add("statictext", undefined, undefined, {name: "statictext4"});
 statictextDurTabOne.text = "Duration";
 
-var edittextDurTabOne = tabOne.add('edittext {properties: {name: "edittext4"}}');
+var edittextDurTabOne = tabOne.add('edittext {properties: {name: "edittextDur"}}');
 edittextDurTabOne.text = "4,3";
 edittextDurTabOne.preferredSize.width = 120;
 
@@ -100,7 +100,7 @@ dividerTwoTabOne.alignment = "fill";
 var statictextLeaveTabOne = tabOne.add("statictext", undefined, undefined, {name: "statictext5"});
 statictextLeaveTabOne.text = "Leave text";
 
-var edittextLeaveText = tabOne.add('edittext {properties: {name: "edittext5"}}');
+var edittextLeaveText = tabOne.add('edittext {properties: {name: "leaveText"}}');
 edittextLeaveText.text = "1";
 edittextLeaveText.preferredSize.width = 120;
 
@@ -110,10 +110,10 @@ var tabTwo = verticaltabbedSlides_innerwrap.add("group", undefined, {name: "tab2
 tabTwo.text = "Slide 2";
 tabTwo.orientation = "column";
 tabTwo.alignChildren = ["fill", "top"];
-tabTwo.spacing = 16;
+tabTwo.spacing = 5;
 tabTwo.margins = 0;
 
-var checkboxTabTwo = tabTwo.add("checkbox", undefined, undefined, {name: "checkbox1"});
+var checkboxTabTwo = tabTwo.add('checkbox {properties: {name:"multiText"}}');
 checkboxTabTwo.text = "Multitext";
 checkboxTabTwo.value = true;
 
@@ -123,7 +123,7 @@ dividerOneTabTwo.alignment = "fill";
 var statictextDurTabTwo = tabTwo.add("statictext", undefined, undefined, {name: "statictext4"});
 statictextDurTabTwo.text = "Duration";
 
-var edittextDurTabTwo = tabTwo.add('edittext {properties: {name: "edittext4"}}');
+var edittextDurTabTwo = tabTwo.add('edittext {properties: {name: "edittextDur"}}');
 edittextDurTabTwo.text = "4,5";
 edittextDurTabTwo.preferredSize.width = 120;
 
@@ -133,13 +133,13 @@ dividerTwoTabTwo.alignment = "fill";
 var statictextLeaveTabTwo = tabTwo.add("statictext", undefined, undefined, {name: "statictext5"});
 statictextLeaveTabTwo.text = "Leave text";
 
-var edittextLeaveTabTwo = tabTwo.add('edittext {properties: {name: "edittext5"}}');
+var edittextLeaveTabTwo = tabTwo.add('edittext {properties: {name: "leaveText"}}');
 edittextLeaveTabTwo.text = "2";
 edittextLeaveTabTwo.preferredSize.width = 120;
 
 // VERTICALTABBEDPANEL1
 // ====================
-verticaltabbedpanelSlides_tabs = [tabOne, tabTwo];
+var verticaltabbedpanelSlides_tabs = [tabOne, tabTwo];
 
 
 for (var i = 0; i < verticaltabbedpanelSlides_tabs.length; i++) {
@@ -182,34 +182,46 @@ button1.onClick = function () {
     newTab.text = "Slide " + newTabNumber;
     newTab.orientation = "column";
     newTab.alignChildren = ["left", 'top'];
-    newTab.spacing = 10;
-    newTab.margins = 10;
+    newTab.alignment = ['fill', 'fill'];
+    newTab.spacing = 5;
+    newTab.margins = 0;
 
+    var checkboxTabTwo = newTab.add('checkbox {properties: {name:"multiText"}}');
+    checkboxTabTwo.text = "Multitext";
+    checkboxTabTwo.value = true;
 
     var nameSlide = 'Slide ' + newTabNumber
 
-    var divider13 = newTab.add("panel", undefined, undefined, {name: "divider" + newTabNumber});
-    divider13.alignment = "fill";
+    var divider = newTab.add("panel", undefined, undefined, {name: "dividerPanel" });
+    divider.alignment = "fill";
 
-    var statictext43 = newTab.add("statictext", undefined, undefined, {name: "statictext4" + newTabNumber});
-    statictext43.text = "Duration";
+    var statictextDuration = newTab.add("statictext", undefined, undefined, {name: "statictextDuration"});
+    statictextDuration.text = "Duration";
 
-    var edittextSubsequence = newTab.add('edittext {properties: {name: "edittext4"}}');
+    var edittextSubsequence = newTab.add('edittext {properties: {name: "edittextDur"}}');
     edittextSubsequence.text = "4,3";
     edittextSubsequence.preferredSize.width = 120;
 
-    var divider23 = newTab.add("panel", undefined, undefined, {name: "divider2" + newTabNumber});
-    divider23.alignment = "fill";
+    var dividerTwo = newTab.add("panel", undefined, undefined, {name: "dividerTwoPanel"});
+    dividerTwo.alignment = "fill";
 
-    var statictext3 = newTab.add("statictext", undefined, undefined, {name: "statictext5" + newTabNumber});
-    statictext3.text = "Leave text";
+    var statictextLeaveTab= newTab.add("statictext", undefined, undefined, {name: "statictextLeaveButton" });
+    statictextLeaveTab.text = "Leave text";
 
-    var edittext3 = newTab.add('edittext {properties: {name: "edittext5"}}');
-    edittext3.text = "1";
-    edittext3.preferredSize.width = 120;
+    var  edittextLeaveTab= newTab.add('edittext {properties: {name: "leaveText"}}');
+    edittextLeaveTab.text = "1";
+    edittextLeaveTab.preferredSize.width = 120;
+
 
     verticaltabbedpanelSlides_tabs.push(newTab);
     verticaltabbedSlides_nav.add('item', nameSlide);
+
+    if (verticaltabbedpanelSlides_tabs.length > 0) {
+        verticaltabbedSlides_nav.selection = verticaltabbedpanelSlides_tabs.length - 1;
+        showTab_verticaltabbedpanel1();
+    }
+
+    dialog.layout.layout(true);
 
 
 }
@@ -222,12 +234,22 @@ button2.alignment = ["fill", "top"];
 button2.onClick = function () {
     if (verticaltabbedSlides_nav.selection !== null) {
         var selectedIndex = verticaltabbedSlides_nav.selection.index;
+
+
         verticaltabbedSlides_innerwrap.remove(verticaltabbedpanelSlides_tabs[selectedIndex]);
         verticaltabbedSlides_nav.remove(selectedIndex);
         verticaltabbedpanelSlides_tabs.splice(selectedIndex, 1);
 
+        for (var i = selectedIndex; i < verticaltabbedSlides_nav.items.length; i++) {
+            verticaltabbedSlides_nav.items[i].text = 'Slide ' + (i + 1);
+
+            if (verticaltabbedpanelSlides_tabs[i]) {
+                verticaltabbedpanelSlides_tabs[i].text = 'Slide ' + (i + 1);
+            }
+        }
+
         if (verticaltabbedpanelSlides_tabs.length > 0) {
-            verticaltabbedSlides_nav.selection = 0;
+            verticaltabbedSlides_nav.selection = selectedIndex - 1;
             showTab_verticaltabbedpanel1();
         }
     }
@@ -243,42 +265,88 @@ button3.onClick = function () {
     var comp = app.project.activeItem;
 
 
-    var arrDuration = edittextDurTabOne.text.split(",");
-    var arrType = edittextType.text.split(',');
-
-    var numberOverlap = parseFloat(edittextOverlap.text)
-
-
     if (!comp || !(comp instanceof CompItem)) {
         alert("Please make sure you have an active composition selected.");
     } else {
+
         app.beginUndoGroup("Find Layers");
 
 
+        var arrType = edittextType.text.split(',');
+
+        var numberOverlap = parseFloat(edittextOverlap.text)
+
         for (var i = 0; i < arrType.length; i++) {
             var tempTime = 0.0
-            var arrLayer = []
-            for (var j = comp.layers.length; j >= 1; j--) {
-                var layer = comp.layer(j);
-                var regex = new RegExp(arrType[i]);
+            var arrLayer = newArrayLayer(arrType, comp, i)
 
-                if (layer.name.match(regex)) {
-                    arrLayer.push(layer)
+            for (var s = 0; s < verticaltabbedpanelSlides_tabs.length; s++) {
+
+                var slideLayers = splitArray(arrLayer,s)
+
+                if(slideLayers.length > 0) {
+                    for (var k = 0; k < slideLayers.length; k++) {
+                        var arrDuration = verticaltabbedpanelSlides_tabs[s].edittextDur.text.split(",");
+                        slideLayers[k].startTime = tempTime;
+                        slideLayers[k].outPoint = calculateTimeOut(tempTime, arrDuration, k)
+                        tempTime = slideLayers[k].outPoint - numberOverlap;
+                    }
+
+
+                    if (verticaltabbedpanelSlides_tabs[s].multiText.value) {
+                        slideLayers[parseInt(verticaltabbedpanelSlides_tabs[s].leaveText.text) - 1].outPoint = slideLayers[slideLayers.length - 1].outPoint
+
+                    }
                 }
-            }
-            for (var k = 0; k < arrLayer.length; k++) {
-                arrLayer[k].startTime = tempTime;
-                arrLayer[k].outPoint = tempTime + (arrDuration[k] ? parseFloat(arrDuration[k]) : parseFloat(arrDuration[arrDuration.length - 1]))
-                tempTime = arrLayer[k].outPoint - numberOverlap;
-            }
-            if (checkboxTabOne.value) {
-                arrLayer[parseInt(edittextLeaveText.text) - 1].outPoint = arrLayer[arrLayer.length - 1].outPoint
             }
         }
 
         app.endUndoGroup();
     }
 }
+
+
+function newArrayLayer(arrType, comp, index) {
+    var arrLayer = []
+    for (var j = comp.layers.length; j >= 1; j--) {
+        var layer = comp.layer(j);
+        var regex = new RegExp(arrType[index]);
+        if (layer.name.match(regex)) {
+            arrLayer.push(layer)
+        }
+    }
+
+    return arrLayer
+}
+
+function calculateTimeOut(tempTime, arrDuration, index) {
+    return tempTime + (arrDuration[index] ? parseFloat(arrDuration[index]) : parseFloat(arrDuration[arrDuration.length - 1]))
+}
+
+function extractNumber(str) {
+    var matches = str.match(/\d/);
+    if (matches) {
+        return parseInt(matches[0], 10);
+    } else {
+        return null;
+    }
+}
+
+function splitArray(array,numberSlide) {
+    var splitedArray = [];
+
+    for (var i = 0; i < array.length; i++) {
+        var number = extractNumber(array[i].name);
+        if (number === numberSlide+1) {
+            splitedArray.push(array[i]);
+        }
+    }
+
+    return splitedArray
+}
+
+
+
 
 
 dialog.show();
